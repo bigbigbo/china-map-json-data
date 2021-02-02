@@ -27,7 +27,7 @@ app.listen(3000, async () => {
   await page.evaluate(async () => {
     const sleep = (t) => new Promise((r) => setTimeout(r, t));
 
-    for (const record of window.AdcodeJson) {
+    for (const record of window.returnExports) {
       getGeoJson(record.adcode);
       await sleep(1000);
     }

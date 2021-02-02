@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "node ./src/index.js",
+    "test": "node ./src/test.js",
     "translator": "node ./src/utils/translator.js"
   },
   "dependencies": {

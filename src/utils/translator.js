@@ -26,8 +26,23 @@ function loop(data) {
 loop(originData.children);
 
 fs.writeFile(
-  path.resolve(__dirname, "../client/assets/adcode.js"),
-  `window.AdcodeJson = ${JSON.stringify(result)}`,
+  path.resolve(__dirname, "../client/assets/city-adcode.js"),
+  `(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define([], factory);
+    } else if (typeof exports === 'object') {
+        // Node. Does not work with strict CommonJS, but
+        // only CommonJS-like environments that support module.exports,
+        // like Node.
+        module.exports = factory();
+    } else {
+        // Browser globals (root is window)
+        root.returnExports = factory();
+  }
+  }(this, function () {
+    return ${JSON.stringify(result)};
+  }));`,
   (err) => {
     if (err) {
       console.error(err);
