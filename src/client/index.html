@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="./assets/city-adcode.js"></script>
+    <script src="https://webapi.amap.com/maps?v=1.4.15&key=232fd33decba6a198f68124b48813fc0"></script>
+    <script src="https://webapi.amap.com/ui/1.1/main.js"></script>
+    <script>
+      const getGeoJson = async (adcode) => {
+        AMapUI.loadUI(["geo/DistrictExplorer"], (DistrictExplorer) => {
+          const districtExplorer = new DistrictExplorer();
+          districtExplorer.loadAreaNode(adcode, async (error, areaNode) => {
+            if (error) {
+              console.error(error);
+              return;
+            }
+            let features = areaNode.getSubFeatures();
+            let finalFeatures = [];
+
+            const jsr = JSON.stringify(features);
+            const blob = new Blob([jsr], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `${adcode}.json`;
+            document.documentElement.appendChild(a);
+            a.click();
+            document.documentElement.removeChild(a);
+          });
+        });
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "china-json",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "郑小波 <zxiaobo@linewell.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node ./src/index.js",
+    "translator": "node ./src/utils/translator.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "puppeteer": "^5.5.0",
+    "rimraf": "^3.0.2"
+  }
+}
